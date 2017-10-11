@@ -14,20 +14,23 @@ library(RColorBrewer)
 library(digest)
 library(readr)
 library(stringr)
-    
+
+#CDC information FLU
+#devtools::install_github("hrbrmstr/cdcfluview")    
+  
 
 
-fontFamily <- "Source Sans Pro"
-fontTitle <- "Source Sans Pro Semibold"
+fontFamily <- "Helvetica Neue"
+fontTitle <- "Helvetica Neue Bold"
 
 color_palette = c("#16a085","#27ae60","#2980b9","#8e44ad","#f39c12","#c0392b","#1abc9c", "#2ecc71", "#3498db", "#9b59b6", "#f1c40f","#e74c3c")
 
 neutral_colors = function(number) {
-	return (brewer.pal(11, "RdYlBu")[-c(5:7)][(number %% 8) + 1])
+    return (brewer.pal(11, "RdYlBu")[-c(5:7)][(number %% 8) + 1])
 }
 
 set1_colors = function(number) {
-	return (brewer.pal(9, "Set1")[c(-6,-8)][(number %% 7) + 1])
+    return (brewer.pal(9, "Set1")[c(-6,-8)][(number %% 7) + 1])
 }
 
 theme_custom <- function() {theme_bw(base_size = 8) + 
@@ -46,7 +49,6 @@ theme_custom <- function() {theme_bw(base_size = 8) +
 }
 
 create_watermark <- function(source = '', filename = '', dark=F) {
-	
 symbols <- c('','', '', '')
 symbol <- symbols[strtoi(substr(digest(filename),1,6), base=36) %% length(symbols)]
 if (length(symbol)==0) symbol <- symbols[1]
@@ -55,8 +57,8 @@ bg_white = "#F0F0F0"
 bg_text = '#969696'
 
 if (dark) {
-	bg_white = "#000000"
-	bg_text = '#666666'
+    bg_white = "#000000"
+    bg_text = '#666666'
 }
 
 watermark <- ggplot(aes(x,y), data=data.frame(x=c(0.5), y=c(0.5))) + geom_point(color = "transparent") +
@@ -125,10 +127,10 @@ web_plot <- function(a, b) {
  }
  
 max_save <- function(plot1, filename, source = '', pdf = FALSE, w=4, h=3, tall=F, dark=F, bg_overide=NA) {
-	png(paste(filename,"png",sep="."),res=300,units="in",width=w,height=h)
-plot.new()
-#if (!is.na(bg_overide)) {par(bg = bg_overide)}
-ifelse(tall,tallweb_plot(plot1,create_watermark(source, filename, dark)),web_plot(plot1,create_watermark(source, filename, dark)))
+    png(paste(filename,"png",sep="."),res=300,units="in",width=w,height=h)
+    plot.new()
+    #if (!is.na(bg_overide)) {par(bg = bg_overide)}
+    ifelse(tall,tallweb_plot(plot1,create_watermark(source, filename, dark)),web_plot(plot1,create_watermark(source, filename, dark)))
 dev.off()
 
 if (pdf) {
@@ -140,10 +142,9 @@ quartz.save(paste(filename,"pdf",sep="."), type = "pdf", device = dev.cur())
 }
 
 video_save <- function(plot1, plot2, filename) {
-	png(paste(filename,"png",sep="."),res=300,units="in",width=1920/300,height=1080/300)
-video_plot(plot1,plot2)
+    png(paste(filename,"png",sep="."),res=300,units="in",width=1920/300,height=1080/300)
+    video_plot(plot1,plot2)
 dev.off()
-
 }
 
 fte_theme <- function (palate_color = "Greys") {
@@ -158,8 +159,8 @@ fte_theme <- function (palate_color = "Greys") {
   color.title = palate[9]
   #color.title = "#2c3e50"
   
-  font.title <- "Source Sans Pro"
-  font.axis <- "Open Sans Condensed Bold"
+  font.title <- "Helvetica Neue"
+  font.axis <- "Helvetica Neue Bold"
   #font.axis <- "M+ 1m regular"
   #font.title <- "Arial"
   #font.axis <- "Arial"
