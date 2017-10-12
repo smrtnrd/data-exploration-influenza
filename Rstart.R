@@ -49,37 +49,37 @@ theme_custom <- function() {theme_bw(base_size = 8) +
 }
 
 create_watermark <- function(source = '', filename = '', dark=F) {
-symbols <- c('','', '', '')
-symbol <- symbols[strtoi(substr(digest(filename),1,6), base=36) %% length(symbols)]
-if (length(symbol)==0) symbol <- symbols[1]
+    symbols <- c('','', '', '')
+    symbol <- symbols[strtoi(substr(digest(filename),1,6), base=36) %% length(symbols)]
+    if (length(symbol)==0) symbol <- symbols[1]
 
-bg_white = "#F0F0F0"
-bg_text = '#969696'
+    bg_white = "#F0F0F0"
+    bg_text = '#969696'
 
-if (dark) {
-    bg_white = "#000000"
-    bg_text = '#666666'
-}
+    if (dark) {
+        bg_white = "#000000"
+        bg_text = '#666666'
+    }
 
-watermark <- ggplot(aes(x,y), data=data.frame(x=c(0.5), y=c(0.5))) + geom_point(color = "transparent") +
-geom_text(x=0, y=0.9, label="Berthin Bitja — The Aris-Brosou Lab", family="Helvetica Neue", color=bg_text, size=1.75, hjust=0) +
+    watermark <- ggplot(aes(x,y), data=data.frame(x=c(0.5), y=c(0.5))) + geom_point(color = "transparent") +
+    geom_text(x=0, y=0.9, label="Berthin Bitja — The Aris-Brosou Lab", family="Helvetica Neue", color=bg_text, size=1.75, hjust=0) +
 
-geom_text(x=5, y=0.9, label="Made using R and ggplot2", family="Helvetica Neue Bold", color=bg_text, size=1.75) +
-#geom_text(x=0, y=1.01, label = symbol, family = 'FontAwesome', color=bg_text, size=2) +
-#geom_text(x=8, y=1, label = "via FiveThirtyEight", family="M+ 1m light", color="white") +
-scale_x_continuous(limits=c(0,10)) +
-scale_y_continuous(limits=c(0.5,1.5)) +
-annotate("segment", x = 0, xend = 10, y=1.5, yend=1.5, color=bg_text, size=0.1) +
-theme_bw() +
-theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), legend.position = "none",
-         panel.border = element_blank(), axis.text.x = element_blank(), axis.text.y = element_blank(), axis.title.x = element_blank(), axis.title.y = element_blank(),
-         axis.ticks = element_blank(), plot.margin = unit(c(0.1,0,-0.4,0), "cm")) +
-theme(plot.background=element_rect(fill=bg_white, color=bg_white),panel.background=element_rect(fill=bg_white, color=bg_white)) +
-scale_color_manual(values=bg_text)
+    geom_text(x=5, y=0.9, label="Made using R and ggplot2", family="Helvetica Neue Bold", color=bg_text, size=1.75) +
+    #geom_text(x=0, y=1.01, label = symbol, family = 'FontAwesome', color=bg_text, size=2) +
+    #geom_text(x=8, y=1, label = "via FiveThirtyEight", family="M+ 1m light", color="white") +
+    scale_x_continuous(limits=c(0,10)) +
+    scale_y_continuous(limits=c(0.5,1.5)) +
+    annotate("segment", x = 0, xend = 10, y=1.5, yend=1.5, color=bg_text, size=0.1) +
+    theme_bw() +
+    theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), legend.position = "none",
+            panel.border = element_blank(), axis.text.x = element_blank(), axis.text.y = element_blank(), axis.title.x = element_blank(), axis.title.y = element_blank(),
+            axis.ticks = element_blank(), plot.margin = unit(c(0.1,0,-0.4,0), "cm")) +
+    theme(plot.background=element_rect(fill=bg_white, color=bg_white),panel.background=element_rect(fill=bg_white, color=bg_white)) +
+    scale_color_manual(values=bg_text)
 
-if (nchar(source) > 0) {watermark <- watermark + geom_text(x=10, y=0.9, label=paste("Data via",source), family="Source Sans Pro", color=bg_text, size=1.75, hjust=1)}
+    if (nchar(source) > 0) {watermark <- watermark + geom_text(x=10, y=0.9, label=paste("Data via",source), family="Helvetica Neue Bold", color=bg_text, size=1.75, hjust=1)}
 
-return (watermark)
+    return (watermark)
 }
 
 web_Layout <- grid.layout(nrow = 2, ncol = 1, heights = unit(c(2,
