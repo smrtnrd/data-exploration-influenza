@@ -1,5 +1,5 @@
 # Check for missing package and install theme
-list.of.packages <- c("readr", "dplyr","ggplot2","extrafont","scales","grid","RColorBrewer","digest","readr","stringr", "ggmap")
+list.of.packages <- c("readr", "dplyr","ggplot2","extrafont","scales","grid","RColorBrewer","digest","readr","stringr", "ggmap", "cdcfluview", "statebins")
 new.packages <- list.of.packages[!(list.of.packages %in% installed.packages()[,"Package"])]
 if(length(new.packages)) install.packages(new.packages)
 
@@ -62,9 +62,9 @@ if (dark) {
 }
 
 watermark <- ggplot(aes(x,y), data=data.frame(x=c(0.5), y=c(0.5))) + geom_point(color = "transparent") +
-geom_text(x=0, y=0.9, label="By Max Woolf — minimaxir.com", family="Source Sans Pro", color=bg_text, size=1.75, hjust=0) +
+geom_text(x=0, y=0.9, label="Berthin Bitja — The Aris-Brosou Lab", family="Helvetica Neue", color=bg_text, size=1.75, hjust=0) +
 
-geom_text(x=5, y=0.9, label="Made using R and ggplot2", family="Source Sans Pro", color=bg_text, size=1.75) +
+geom_text(x=5, y=0.9, label="Made using R and ggplot2", family="Helvetica Neue Bold", color=bg_text, size=1.75) +
 #geom_text(x=0, y=1.01, label = symbol, family = 'FontAwesome', color=bg_text, size=2) +
 #geom_text(x=8, y=1, label = "via FiveThirtyEight", family="M+ 1m light", color="white") +
 scale_x_continuous(limits=c(0,10)) +
